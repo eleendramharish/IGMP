@@ -113,7 +113,7 @@ always@(posedge clk)
                      end
                  else
                      begin 
-                        state = p11;
+                        state = p9;
                      end 
                  end
             p1: begin
@@ -123,17 +123,17 @@ always@(posedge clk)
                      end
                  else
                      begin
-                        state = p11;
+                        state = p9;
                      end           
                  end
             p2: begin
-                      if(checksum === 8'b10101110)
+                      if(checksum === 16'b1011010111001110)
                           begin
                              state = p3;
                           end
                       else
                           begin
-                             state = p11;
+                             state = p9;
                           end           
                       end
             p3: begin
@@ -143,80 +143,62 @@ always@(posedge clk)
                            end
                       else
                            begin
-                              state = p11;
+                              state = p9;
                            end           
                       end                 
+                              
             p4: begin
-                      if(mrc === 8'b1010)
+                      if(s === 1)
                            begin
                               state = p5;
                            end
                       else
                            begin
-                              state = p11;
-                           end           
-                      end                     
-            p5: begin
-                      if(s === 1)
-                           begin
-                              state = p6;
-                           end
-                      else
-                           begin
-                              state = p11;
+                              state = p9;
                            end           
                       end                       
-            p6: begin
-                      if(mrc === 8'b1010)
-                            begin
-                               state = p7;
-                            end
-                      else
-                            begin
-                               state = p11;
-                            end           
-                      end                                              
-            p7: begin
+                                             
+            p5: begin
                       if(qrv === 3'b101)
                             begin
-                                state = p8;
+                                state = p6;
                             end
                       else
                             begin
-                                state = p11;
+                                state = p9;
                             end           
                       end
-            p8: begin
+            p6: begin
                       if(qqic === 8'b10000000)
                             begin
-                                 state = p9;
+                                 state = p7;
                             end
                       else
                             begin
-                                 state = p11;
+                                 state = p9;
                             end           
                       end
-            p9: begin
-                      if(source === 8'b10101101)
+            p7: begin
+                      if(source === 16'b1010101110101101)
                              begin
-                                  state = p10;
+                                  state = p8;
                              end
                       else
                              begin
-                                  state = p11;
+                                  state = p9;
                              end           
                       end
-            p10: begin
+            p8: begin
                       if(sourceadd === 32'b11010110110101110011101111110111)
                             begin
                                   valid = 1;  
                             end
                       else
                             begin
-                                  state = p11;
+                                  state = p9;
                             end
                  end                       
-            p11: begin
+            p9: begin
                       invalid = 1;  
                  end  
                  default:state=p0;                    
